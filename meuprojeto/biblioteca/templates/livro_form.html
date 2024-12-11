@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% if livro is not None %}
+        <h2>Editar Livro</h2>
+    {% else %}
+        <h2>Novo Livro</h2>
+    {% endif %}
+    <form method="POST">
+        {% csrf_token %}
+        <label for="titulo">
+            Título:
+            <input type="text" name="titulo" maxlength="200" value="{{ livro.titulo|default:'' }}">
+        </label>
+        <label for="autor">
+            Autor:
+            {% if autores|length == 0 %}
+                Não há <a href="{% url 'autor-list' %}">Autores</a> registrados
+            {% else %}
+                <select name="autor">
+                    {% for autor in autores %}
+                        {% if livro and livro.autor.id == autor.id %}
+                            <option value="{{ autor.id }}" selected>{{ autor.nome }}</option>
+                        {% else %}
+                            <option value="{{ autor.id }}">{{ autor.nome }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            {% endif %}
+        </label>
+        <label for="publicado_em">
+            Data de Publicação:
+            <input type="date" name="publicado_em" value="{{ livro.publicado_em|default:'' }}">
+        </label>
+        {% if autores|length != 0 %}
+            <button type="submit">Salvar</button>
+        {% endif %}
+    </form>
+{% endblock %}

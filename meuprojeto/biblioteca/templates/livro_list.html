@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% if object_list|length == 0 %}
+        <p>Não há Livros registrados</p>
+    {% else %}
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Título</th>
+                    <th>Autor</th>
+                    <th>Data de Publicação</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for livro in object_list %}
+                <tr>
+                    <td>{{ livro.titulo }}</td>
+                    <td>{{ livro.autor }}</td>
+                    <td>{{ livro.publicado_em }}</td>
+                    <td>
+                        <a href="{% url 'livro-update' livro.id %}">Editar</a> |
+                        <a href="{% url 'livro-delete' livro.id %}">Remover</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+    <a href="{% url 'livro-create' %}">Registrar Livro</a>
+{% endblock %}

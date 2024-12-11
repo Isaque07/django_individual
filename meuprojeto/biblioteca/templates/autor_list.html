@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% if object_list|length == 0 %}
+        <p>Não há Autores registrados</p>
+    {% else %}
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Data de Nascimento</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for autor in object_list %}
+            <tr>
+                <td>{{ autor.nome }}</td>
+                <td>{{ autor.data_nascimento }}</td>
+                <td>
+                    <a href="{% url 'autor-update' autor.id %}">Editar</a> |
+                    <a href="{% url 'autor-delete' autor.id %}">Remover</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+    <a href="{% url 'autor-create' %}">Registrar Autor</a>
+{% endblock %}

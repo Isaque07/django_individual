@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+{% block content %}
+    <p>Seções do Sistema:</p>
+    <a href="{% url 'autor_list.html' %}">Autores</a>
+    <a href="{% url 'livro_list.html' %}">Livros</a>
+{% endblock %}

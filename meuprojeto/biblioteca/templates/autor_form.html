@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% if autor is not None %}
+        <h2>Editar Autor</h2>
+    {% else %}
+        <h2>Novo Autor</h2>
+    {% endif %}
+    <form method="POST">
+        {% csrf_token %}
+        <label for="nome">
+            Nome:
+            <input type="text" name="nome" maxlength="100" value="{{ autor.nome|default:'' }}">
+        </label>
+        <label for="data_nascimento">
+            Data de Nascimento:
+            <input type="date" name="data_nascimento" value="{{ autor.data_nascimento|default:'' }}">
+        </label>
+        <button type="submit">Salvar</button>
+    </form>
+{% endblock %}
