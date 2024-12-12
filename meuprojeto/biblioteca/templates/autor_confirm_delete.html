@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h2>Tem certeza que deseja excluir o autor {{ object.nome }}?</h2>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Sim, excluir</button>
+    </form>
+    <a href="{% url 'autor-list' %}">Cancelar</a>
+{% endblock %}
